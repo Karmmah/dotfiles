@@ -12,6 +12,7 @@ set shiftwidth=4
 set list
 "set listchars=eol:⏎,tab:>-,trail:.,space:.
 "set listchars=eol:¶,tab:\\_,trail:¨,space:¨
+set listchars=eol:¶,tab:\\_,trail:·,space:·
 "set listchars=eol:\¬,tab:\\_,trail:¯,space:¯
-set listchars=eol:\¬,tab:\\_,trail:¨,space:¨
+"set listchars=eol:\¬,tab:\\_,trail:¨,space:¨
 
