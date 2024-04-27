@@ -1,6 +1,6 @@
 "colorscheme slate
 "colorscheme morning
-colorscheme default
+"colorscheme default
 
 set number
 set relativenumber
