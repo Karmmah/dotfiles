@@ -12,6 +12,9 @@ ln -s dotfiles/.tmux.conf ~/.tmux.conf
 
 ### Firefox
 
+- set up firefox:
+	- search "about:config" and set "toolkit.legacyUserProfileCustomizations.stylesheets" to true
+	- 
 - link firefox css file to remove tabs
 	- navigate to /home/<user>/.var/app/org.mozilla.firefox/.mozilla/firefox/<release>.<profile>/chrome/ (make folder chrome if it doesn't exist)
 
