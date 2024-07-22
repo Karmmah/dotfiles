@@ -21,3 +21,7 @@ set listchars=eol:¶,tab:\\_,trail:·,space:·
 
 " show filename
 set laststatus=2
+
+" set tabs to spaces for python files
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
+
