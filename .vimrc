@@ -25,3 +25,6 @@ set laststatus=2
 " set tabs to spaces for python files
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 
+" set wildmenu
+set wildmenu
+
