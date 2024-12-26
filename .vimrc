@@ -2,6 +2,8 @@
 "colorscheme morning
 "colorscheme default
 
+syntax on
+
 " set up line numbering
 set number
 set relativenumber
@@ -15,7 +17,8 @@ set shiftwidth=4
 set list
 "set listchars=eol:⏎,tab:>-,trail:.,space:.
 "set listchars=eol:¶,tab:\\_,trail:¨,space:¨
-set listchars=eol:¶,tab:\\_,trail:·,space:·
+"set listchars=eol:¶,tab:\\_,trail:·,space:·
+set listchars:eol:$,tab:\\_,trail:`,space:`
 "set listchars=eol:\¬,tab:\\_,trail:¯,space:¯
 "set listchars=eol:\¬,tab:\\_,trail:¨,space:¨
 
