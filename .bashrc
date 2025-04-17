@@ -4,4 +4,4 @@
 #PS1="\h-\u-$PWD \! \#\n> "
 #PS1="┌\h-\u-\w\n└→ "
 #PS1="╭\h-\u-\w\n╰─▷ "
-if [ -v CONTAINER_ID ]; then export PS1="╭\h-distrobox-$CONTAINER_ID:\w\n╰─▷ "; else export PS1="╭\h:\w\n╰─▷ "; fi
+if [ -v CONTAINER_ID ]; then export PS1="\n╭\h-distrobox-$CONTAINER_ID:\w\n╰─▷ "; else export PS1="\n╭\h:\w\n╰─▷ "; fi
