@@ -2,6 +2,8 @@
 "colorscheme morning
 "colorscheme default
 
+syntax on
+
 " set up line numbering
 set number
 set relativenumber

@@ -1,0 +1,15 @@
+window-decoration = none
+
+#window-width = 169
+#window-height = 37
+window-width = 80
+#window-height = 24
+window-height = 36
+#window-height = 43
+
+#theme = catppuccin-latte
+#theme = Tomorrow Night Blue
+theme = primary
+
+#font-family = "JetBrains Mono"
+font-family = "CommitMono"

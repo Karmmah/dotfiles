@@ -1,0 +1,5 @@
+# ssh config
+
+Host *hpc.itc.rwth-aachen.de
+	SetEnv TERM=xterm-256color
+	SendEnv TERM
