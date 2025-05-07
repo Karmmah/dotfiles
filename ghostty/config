@@ -7,9 +7,16 @@ window-width = 80
 window-height = 36
 #window-height = 43
 
-#theme = catppuccin-latte
-#theme = Tomorrow Night Blue
-theme = primary
+theme = Tomorrow Night Blue
+#theme = rose-pine
+#theme = Broadcast
+#theme = heeler
+#theme = terafox
+#theme = Vaughn
+#theme = xcodedark
+#theme = primary
+#theme = GitLab-Light
 
 #font-family = "JetBrains Mono"
 font-family = "CommitMono"
+font-size = 13

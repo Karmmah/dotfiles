@@ -2,7 +2,7 @@
 "colorscheme morning
 "colorscheme default
 
-syntax on
+"syntax on
 
 " set up line numbering
 set number
@@ -14,7 +14,8 @@ set tabstop=4
 set shiftwidth=4
 
 " whitespace
-set list
+"set list
+set nolist
 "set listchars=eol:⏎,tab:>-,trail:.,space:.
 "set listchars=eol:¶,tab:\\_,trail:¨,space:¨
 "set listchars=eol:¶,tab:\\_,trail:·,space:·
@@ -31,3 +32,9 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 " set wildmenu
 set wildmenu
 
+" set accent coloring
+highlight lineNr ctermfg=grey
+highlight Statement ctermfg=yellow
+highlight Search ctermfg=black
+highlight MatchParen ctermfg=black
+highlight MatchParen ctermbg=green
