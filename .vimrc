@@ -2,7 +2,7 @@
 "colorscheme morning
 "colorscheme default
 
-"syntax on
+syntax on
 
 " set up line numbering
 set number
@@ -34,7 +34,7 @@ set wildmenu
 
 " set accent coloring
 highlight lineNr ctermfg=grey
-highlight Statement ctermfg=yellow
 highlight Search ctermfg=black
 highlight MatchParen ctermfg=black
 highlight MatchParen ctermbg=green
+highlight Statement ctermfg=yellow
