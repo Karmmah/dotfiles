@@ -1,0 +1,37 @@
+# Colors (Root Loops)
+# via rootloops.sh
+
+background = 00253b
+foreground = d9efff
+
+# black
+palette = 0=#003e5f
+palette = 8=#0072a8
+
+# red
+palette = 1=#ff828f
+palette = 9=#ffa9af
+
+# green
+palette = 2=#6aca00
+palette = 10=#78e300
+
+# yellow
+palette = 3=#e79d00
+palette = 11=#ffb333
+
+# blue
+palette = 4=#73b1ff
+palette = 12=#9cc7ff
+
+# purple
+palette = 5=#da84ff
+palette = 13=#e4a9ff
+
+# aqua
+palette = 6=#00c7c7
+palette = 14=#00dfe0
+
+# white
+palette = 7=#8ccfff
+palette = 15=#eff8ff

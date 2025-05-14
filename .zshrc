@@ -18,11 +18,40 @@ precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 RPROMPT=\$vcs_info_msg_0_
-zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
+#zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
+zstyle ':vcs_info:git:*' formats '%F{240}(%b)%f'
 zstyle ':vcs_info:*' enable git
 
-PROMPT='
-%F{yellow}%/ %(?.%F{green}suc.%F{red}fail:%?)%f%b
-%# -> '
+# distrobox status display
+local container_info=""
+if [ -n "$CONTAINER_ID" ]; then
+	#container_info="[%F{green}Distrobox:%F{blue}${CONTAINER_ID}%F{green}]%f "
+	container_info="%F{blue}${CONTAINER_ID}%f "
+fi
 
-setopt PROMPT_SUBST
+## exit code display
+#prevExitCode=$?
+#exitCodeDisp="${prevExitCode}"
+#if [ $prevExitCode -eq 1 ]; then
+#	exitCodeDisp=$exitCodeDisp" generic"
+#elif [ $prevExitCode -eq 2 ]; then
+#	exitCodeDisp=$exitCodeDisp" command"
+#elif [ $prevExitCode -eq 126 ]; then
+#	exitCodeDisp=$exitCodeDisp" permission"
+#elif [ $prevExitCode -eq 127 ]; then
+#	exitCodeDisp=$exitCodeDisp" path resolution"
+#elif [ $prevExitCode -eq 130 ]; then
+#	exitCodeDisp=$exitCodeDisp" interrupted"
+#elif [ $prevExitCode -eq 255 ]; then
+#	exitCodeDisp=$exitCodeDisp" other"
+#fi
+
+#PROMPT='
+#${container_info}%F{yellow}%/ %(?.%F{green}suc.%F{red}fail:%?)%f%b
+#%F{green}%# >%f '
+
+PROMPT='%(?..%F{red}fail:%? )
+${container_info}%F{yellow}%/%f%b
+%F{green}%# %F{green}>%f '
+
+setopt PROMPT_SUBST #see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html

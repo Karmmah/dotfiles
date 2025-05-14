@@ -1,4 +1,4 @@
-window-decoration = none
+#window-decoration = none
 
 #window-width = 169
 #window-height = 37
@@ -7,7 +7,9 @@ window-width = 80
 window-height = 36
 #window-height = 43
 
-theme = Tomorrow Night Blue
+#theme = FruityElderberryDark
+theme = ClassicPlumDark
+#theme = Tomorrow Night Blue
 #theme = rose-pine
 #theme = Broadcast
 #theme = heeler
@@ -17,6 +19,12 @@ theme = Tomorrow Night Blue
 #theme = primary
 #theme = GitLab-Light
 
+# Copy the configuration below and add it to your
+# ~/.config/ghostty/config file
+
+
 #font-family = "JetBrains Mono"
 font-family = "CommitMono"
-font-size = 13
+font-size = 14
+
+command = export "ZDOTDIR=/home/pk" && /bin/zsh --login --interactive
