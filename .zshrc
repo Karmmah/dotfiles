@@ -12,6 +12,10 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+
+alias ls='ls --color=auto'
+
+
 # git status display
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
@@ -28,6 +32,7 @@ if [ -n "$CONTAINER_ID" ]; then
 	#container_info="[%F{green}Distrobox:%F{blue}${CONTAINER_ID}%F{green}]%f "
 	container_info="%F{blue}${CONTAINER_ID}%f "
 fi
+
 
 ## exit code display
 #prevExitCode=$?
@@ -51,7 +56,7 @@ fi
 #%F{green}%# >%f '
 
 PROMPT='%(?..%F{red}fail:%? )
-${container_info}%F{yellow}%/%f%b
+${container_info}%F{5}%/%f%b
 %F{green}%# %F{green}>%f '
 
 setopt PROMPT_SUBST #see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
