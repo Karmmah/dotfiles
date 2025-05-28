@@ -33,13 +33,14 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 set wildmenu
 
 " set accent coloring
-highlight lineNr ctermfg=grey
-highlight Search ctermfg=black
-highlight MatchParen ctermfg=black
-highlight MatchParen ctermbg=green
-highlight DiffAdd ctermfg=black
-highlight DiffChange ctermfg=black
-highlight DiffDelete ctermfg=black
-highlight DiffText ctermfg=black
-highlight DiffTextAdd ctermfg=black
-highlight Statement ctermfg=darkred
+highlight lineNr ctermfg=7
+highlight Search ctermfg=0 ctermbg=10
+"highlight MatchParen ctermfg=15 ctermbg=10
+highlight MatchParen ctermfg=15
+highlight DiffAdd ctermfg=15
+highlight DiffChange ctermfg=15 ctermbg=7
+highlight DiffDelete ctermfg=0 ctermbg=1
+highlight DiffText ctermfg=15 ctermbg=6
+"highlight DiffTextAdd ctermfg=15
+highlight Statement ctermfg=2
+highlight Pmenu ctermfg=7

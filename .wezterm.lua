@@ -12,8 +12,14 @@ config.initial_rows = 28
 
 -- FONT
 config.font_size = 14
+--config.font = wezterm.font('CommitMono', { weight = 'Regular', italic = false })
+--config.font = wezterm.font 'CommitMono'
 --config.font = wezterm.font 'JetBrains Mono'
-config.font = wezterm.font 'CommitMono'
+--config.font = wezterm.font 'GeistMono Nerd Font' --rounded
+--config.font = wezterm.font 'DepartureMono Nerd Font' --pixelated
+config.font = wezterm.font 'RecMonoLinear Nerd Font'
+--config.font = wezterm.font 'RecMonoCasual Nerd Font' --more comic sans like
+
 
 
 -- THEME

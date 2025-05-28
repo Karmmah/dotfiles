@@ -3,8 +3,9 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt extendedglob
-bindkey -v
+#bindkey -v
 # End of lines configured by zsh-newuser-install
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/pk/.zshrc'
 
@@ -13,6 +14,7 @@ compinit
 # End of lines added by compinstall
 
 
+# enable color for ls command
 alias ls='ls --color=auto'
 
 
@@ -59,4 +61,4 @@ PROMPT='%(?..%F{red}fail:%? )
 ${container_info}%F{5}%/%f%b
 %F{green}%# %F{green}>%f '
 
-setopt PROMPT_SUBST #see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+#setopt PROMPT_SUBST #see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
