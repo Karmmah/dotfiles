@@ -5,27 +5,33 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 
+-- LAYOUT
+
 config.initial_cols = 80
---config.initial_rows = 36
 config.initial_rows = 28
+
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+--config.enable_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = true
+
+
+-- BEHAVIOUR
+
+config.hide_mouse_cursor_when_typing = false
 
 
 -- FONT
 config.font_size = 14
 --config.font = wezterm.font('CommitMono', { weight = 'Regular', italic = false })
---config.font = wezterm.font 'CommitMono'
 --config.font = wezterm.font 'JetBrains Mono'
---config.font = wezterm.font 'GeistMono Nerd Font' --rounded
 --config.font = wezterm.font 'DepartureMono Nerd Font' --pixelated
 config.font = wezterm.font 'RecMonoLinear Nerd Font'
+--config.font = wezterm.font('RecMonoLinear Nerd Font', { weight = 'Bold', italic = false })
 --config.font = wezterm.font 'RecMonoCasual Nerd Font' --more comic sans like
-
+--config.font = wezterm.font 'BerkeleyMonoTrial'
 
 
 -- THEME
-
---config.color_scheme = 'AdventureTime'
---config.color_scheme = 'Tomorrow Night Blue'
 
 -- Root Loops color schemes
 -- via https://rootloops.sh
@@ -128,7 +134,35 @@ local appearance_themes = {
   --Dark = IntensePlumDark,
   Dark = ClassicBlueberryDark,
 }
-config.colors = appearance_themes[wezterm.gui.get_appearance()] or dark_theme
+local selectedTheme = appearance_themes[wezterm.gui.get_appearance()] --select according to system light/dark mode
+config.colors = selectedTheme or dark_theme
+
+--config.color_scheme = 'AdventureTime'
+--config.color_scheme = 'Tomorrow Night Blue'
+
+
+local windowFrameColor = selectedTheme.brights[8]
+--local windowFrameColor = selectedTheme.foreground
+config.window_frame = {
+  border_left_width = '0.3cell',
+  border_right_width = '0.3cell',
+  border_bottom_height = '0.15cell',
+  border_top_height = '0.15cell',
+  border_left_color = windowFrameColor,
+  border_right_color = windowFrameColor,
+  border_bottom_color = windowFrameColor,
+  border_top_color = windowFrameColor,
+  active_titlebar_bg = windowFrameColor,
+  active_titlebar_fg = selectedTheme.cursor_fg,
+  --inactive_titlebar_bg = windowFrameColor,
+  --inactive_titlebar_fg = selectedTheme.background,
+  --active_titlebar_border_bottom = selectedTheme.ansi[4],
+  --inactive_titlebar_border_bottom = selectedTheme.ansi[5],
+  --button_fg = selectedTheme.ansi[4],
+  --button_bg = selectedTheme.ansi[3],
+  --button_hover_fg = '#ffffff',
+  --button_hover_bg = '#3b3052',
+}
 
 
 -- Finally, return the configuration to wezterm:
