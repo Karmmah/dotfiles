@@ -23,3 +23,6 @@ echo "Setting up ghostty config"
 mkdir -p $HOME/.config/ghostty
 rm $HOME/.config/ghostty/config
 ln -s ~/dotfiles/ghostty/config $HOME/.config/ghostty/
+
+echo "Setting up zsh plugins"
+git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/zsh-autosuggestions

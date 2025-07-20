@@ -40,7 +40,7 @@ set wildmenu
 
 " set accent coloring
 highlight lineNr ctermfg=7
-highlight Search ctermfg=0 ctermbg=10
+"highlight Search ctermfg=0 ctermbg=10
 "highlight MatchParen ctermfg=15 ctermbg=10
 highlight MatchParen ctermfg=15
 highlight DiffAdd ctermfg=15

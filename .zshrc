@@ -18,16 +18,6 @@ compinit
 alias ls='ls --color=auto'
 
 
-# git status display
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-RPROMPT=\$vcs_info_msg_0_
-#zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
-zstyle ':vcs_info:git:*' formats '%F{240}(%b)%f'
-zstyle ':vcs_info:*' enable git
-
 # distrobox status display
 local container_info=""
 if [ -n "$CONTAINER_ID" ]; then
@@ -62,3 +52,34 @@ ${container_info}%F{5}%/%f%b
 %F{green}%# %F{green}>%f '
 
 #setopt PROMPT_SUBST #see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+
+
+# git status display on right side
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info } #hook function executed before actual prompt
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT=\$vcs_info_msg_0_ #'right'-aligned prompt
+#zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
+zstyle ':vcs_info:git:*' formats '%F{240}(%b)%f'
+zstyle ':vcs_info:*' enable git
+
+
+# autocompletion/-suggestion
+# switch autocomplete mode to show all possibilities
+#autoload -Uz compinit
+#compinit
+#zstyle ':completion:*' accept-exact false
+if [ -d "$HOME/.zsh/zsh-autosuggestions/" ]; then
+	source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+	ZSH_AUTOSUGGEST_STRATEGY=(completion)
+else
+	echo "zsh-autosuggestions not installed"
+	echo "use git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/zsh-autosuggestions"
+fi
+
+
+# aliases
+alias db='distrobox'
+alias dbe='distrobox enter'
+alias dbl='distrobox list'
