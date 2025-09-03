@@ -34,14 +34,22 @@ config.hide_mouse_cursor_when_typing = false
 
 
 -- FONT
+-- 420 HELLO 1Il 0O8 ([{ != && |>
 config.font_size = 14
---config.font = wezterm.font('CommitMono', { weight = 'Regular', italic = false })
+config.font = wezterm.font 'CommitMono Nerd Font'
+config.line_height = 1.1
 --config.font = wezterm.font 'JetBrains Mono'
---config.font = wezterm.font 'DepartureMono Nerd Font' --pixelated
---config.font = wezterm.font('RecMonoLinear Nerd Font', { weight = 'Bold', italic = false })
-config.font = wezterm.font 'RecMonoLinear Nerd Font'
+--config.font = wezterm.font('RecMonoLinear Nerd Font', {weight = 'Bold', italic = false})
+--config.font = wezterm.font 'RecMonoLinear Nerd Font'
 --config.font = wezterm.font 'RecMonoCasual Nerd Font' --more comic sans like
 --config.font = wezterm.font 'BerkeleyMonoTrial'
+--config.font = wezterm.font 'AtkinsonHyperlegibleMono'
+--config.font = wezterm.font 'Iosevka'
+--config.font = wezterm.font 'VictorMono'
+--config.font = wezterm.font('VictorMono', {weight='Bold'})
+--config.font = wezterm.font 'Adwaita Mono'
+--config.font = wezterm.font 'Sans Forgetica'
+--config.font = wezterm.font 'OpenDyslexicMono'
 
 
 -- THEME

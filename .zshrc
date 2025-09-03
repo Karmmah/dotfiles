@@ -47,8 +47,11 @@ fi
 #${container_info}%F{yellow}%/ %(?.%F{green}suc.%F{red}fail:%?)%f%b
 #%F{green}%# >%f '
 
-PROMPT='%(?..%F{red}fail:%? )
-${container_info}%F{5}%/%f%b
+#PROMPT='%(?..%F{red}fail:%? )
+#${container_info}%F{5}%/%f%b
+#%F{green}%# %F{green}>%f '
+
+PROMPT='%(?..%F{red}fail:%? )${container_info}%F{5}%/%f%b
 %F{green}%# %F{green}>%f '
 
 #setopt PROMPT_SUBST #see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
