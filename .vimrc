@@ -34,7 +34,10 @@ set nolist
 "set listchars=eol:⏎,tab:>-,trail:.,space:.
 "set listchars=eol:¶,tab:\\_,trail:·,space:·
 "set listchars=eol:\¬,tab:\\_,trail:¨,space:¨
-set listchars:eol:$,tab:\\_,trail:`,space:`
+"set listchars:eol:$,tab:\\_,trail:`,space:`
+"set listchars:eol:§,tab:__/,trail:`,space:`
+set listchars:eol:§,tab:__/,space:·
+"set listchars:eol:§,tab:==>,space:·
 
 " show filename
 set laststatus=2

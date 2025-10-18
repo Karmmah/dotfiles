@@ -88,6 +88,68 @@ local IntensePlumDark = {
 	},
 }
 
+-- sugar:10, artificial:10, sogginess:6, intense, Plum, just a splash
+local IntensePlumDark2 = {
+  foreground = "#deeef9",
+  background = "#0c2535",
+  cursor_bg = "#a0cdee",
+  cursor_border = "#f1f8fd",
+  cursor_fg = "#0c2535",
+  selection_bg = "#deeef9",
+  selection_fg = "#0c2535",
+  ansi = {
+    "#193e55",
+    "#ffccc3",
+    "#5aff8d",
+    "#ffd65e",
+    "#ccd9ff",
+    "#ffc4f9",
+    "#83edff",
+    "#a0cdee"
+  },
+  brights = {
+    "#367197",
+    "#ffece8",
+    "#d0ffd8",
+    "#fff0c8",
+    "#ebf1ff",
+    "#ffe9fc",
+    "#d5f8ff",
+    "#f1f8fd"
+  },
+}
+
+-- sugar:5, artificial:8, sogginess:4, intense, orange, go all in
+local IntensePlumLight = {
+  foreground = "#243d4e",
+  background = "#eaf2f8",
+  cursor_bg = "#486f8b",
+  cursor_border = "#142430",
+  cursor_fg = "#eaf2f8",
+  selection_bg = "#243d4e",
+  selection_fg = "#eaf2f8",
+  ansi = {
+    "#d5e5f1",
+    "#b54032",
+    "#377e4a",
+    "#836a1e",
+    "#4760d1",
+    "#a92da4",
+    "#207a87",
+    "#486f8b"
+  },
+  brights = {
+    "#87b1d0",
+    "#d65342",
+    "#43985a",
+    "#9e8026",
+    "#5e7ae5",
+    "#c644bf",
+    "#2993a3",
+    "#142430"
+  },
+}
+
 -- sugar:5, artificial:10, sogginess:1, intense, orange, go all in
 local IntenseOrangeLight = {
 	foreground = "#3f3833",
@@ -120,7 +182,7 @@ local IntenseOrangeLight = {
 }
 
 -- sugar:7, artificial:10, sogginess:0, classic, blueberry, no milk
-ClassicBlueberryDark = {
+local ClassicBlueberryDark = {
 	foreground = "#e2e2e2",
 	background = "#080808",
 	cursor_bg = "#b9b9b9",
@@ -150,17 +212,145 @@ ClassicBlueberryDark = {
 	},
 }
 
+-- sugar:10, artificial:10, sogginess:4, intense, blueberry, just a splash
+local IntenseBlueberryDark = {
+  foreground = "#dceff3",
+  background = "#122629",
+  cursor_bg = "#9fd1da",
+  cursor_border = "#f0f8fa",
+  cursor_fg = "#122629",
+  selection_bg = "#dceff3",
+  selection_fg = "#122629",
+  ansi = {
+    "#223f44",
+    "#ffccc3",
+    "#5aff8d",
+    "#ffd65e",
+    "#ccd9ff",
+    "#ffc4f9",
+    "#83edff",
+    "#9fd1da"
+  },
+  brights = {
+    "#44737b",
+    "#ffece8",
+    "#d0ffd8",
+    "#fff0c8",
+    "#ebf1ff",
+    "#ffe9fc",
+    "#d5f8ff",
+    "#f0f8fa"
+  },
+}
+
+-- sugar:5, artificial:8, sogginess:4, intense, blueberry, go all in
+local IntenseBlueberryLight = {
+  foreground = "#223f44",
+  background = "#e6f4f6",
+  cursor_bg = "#44737b",
+  cursor_border = "#122629",
+  cursor_fg = "#e6f4f6",
+  selection_bg = "#223f44",
+  selection_fg = "#e6f4f6",
+  ansi = {
+    "#cde8ed",
+    "#b54032",
+    "#377e4a",
+    "#836a1e",
+    "#4760d1",
+    "#a92da4",
+    "#207a87",
+    "#44737b"
+  },
+  brights = {
+    "#7db7c1",
+    "#d65342",
+    "#43985a",
+    "#9e8026",
+    "#5e7ae5",
+    "#c644bf",
+    "#2993a3",
+    "#122629"
+  },
+}
+
+local IntenseKiwiLight = {
+	foreground = "#353c36",
+	background = "#eff1ef",
+	cursor_bg = "#646d65",
+	cursor_border = "#1f2420",
+	cursor_fg = "#eff1ef",
+	selection_bg = "#353c36",
+	selection_fg = "#eff1ef",
+	ansi = {
+		"#dfe4e0",
+		"#b54032",
+		"#377e4a",
+		"#836a1e",
+		"#4760d1",
+		"#a92da4",
+		"#207a87",
+		"#646d65"
+	},
+	brights = {
+		"#a4afa6",
+		"#d65342",
+		"#43985a",
+		"#9e8026",
+		"#5e7ae5",
+		"#c644bf",
+		"#2993a3",
+		"#1f2420"
+	},
+}
+
+local IntenseKiwiDark = {
+	foreground = "#e9ece9",
+	background = "#1f2420",
+	cursor_bg = "#c1c9c2",
+	cursor_border = "#f5f7f6",
+	cursor_fg = "#1f2420",
+	selection_bg = "#e9ece9",
+	selection_fg = "#1f2420",
+	ansi = {
+		"#353c36",
+		"#f7afa3",
+		"#6be18a",
+		"#e7bf4d",
+		"#b0c2f7",
+		"#ecabe5",
+		"#5dd8ec",
+		"#c1c9c2"
+	},
+	brights = {
+		"#646d65",
+		"#facec6",
+		"#8ff5a7",
+		"#f7d782",
+		"#ced9fa",
+		"#f3ccee",
+		"#97eaf8",
+		"#f5f7f6"
+	},
+}
+
 local appearance_themes = {
-  Light = IntenseOrangeLight,
-  --Dark = IntensePlumDark,
-  Dark = ClassicBlueberryDark,
+	--Light = IntenseOrangeLight,
+	--Light = IntensePlumLight,
+	--Dark = IntensePlumDark,
+	--Dark = IntensePlumDark2,
+	--Dark = ClassicBlueberryDark,
+	--Light = IntenseBlueberryLight,
+	--Dark = IntenseBlueberryDark,
+	Light = IntenseKiwiLight,
+	Dark = IntenseKiwiDark
 }
 local selectedTheme = appearance_themes[wezterm.gui.get_appearance()] --select according to system light/dark mode
 config.colors = selectedTheme or dark_theme
 
 local windowFrameColor = selectedTheme.brights[8]
---local windowFrameColor = selectedTheme.foreground
-config.window_frame = {
+	--local windowFrameColor = selectedTheme.foreground
+	config.window_frame = {
 	border_left_width = '0.3cell',
 	border_right_width = '0.3cell',
 	border_bottom_height = '0.15cell',
