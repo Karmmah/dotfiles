@@ -1,5 +1,7 @@
 syntax on
 
+"set termguicolors
+
 colorscheme default
 "colorscheme slate
 "colorscheme morning
@@ -30,15 +32,22 @@ set shiftwidth=4
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 
 " WHITESPACE
-"set list
 set nolist
+"set list
 "set listchars=eol:⏎,tab:>-,trail:.,space:.
 "set listchars=eol:¶,tab:\\_,trail:·,space:·
 "set listchars=eol:\¬,tab:\\_,trail:¨,space:¨
 "set listchars:eol:$,tab:\\_,trail:`,space:`
 "set listchars:eol:§,tab:__/,trail:`,space:`
-set listchars:eol:§,tab:__/,space:·
+"set listchars:eol:§,tab:__/,space:·
 "set listchars:eol:§,tab:==>,space:·
+"set listchars:eol:↩,tab:__/,space:‿
+"set listchars:eol:↲,tab:__/,space:߸
+"set listchars:eol:↲,tab:==>,space:·
+"set listchars:eol:↩,tab:__/,space:߸
+"set listchars:eol:↲,tab:__/,space:‸
+"set listchars:eol:↲,tab:__/,space:⁔
+set listchars:eol:↩,tab:-->,space:⁔
 
 " SHOW FILENAME
 set laststatus=2

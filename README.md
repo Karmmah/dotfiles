@@ -21,3 +21,7 @@ ln -s dotfiles/.tmux.conf ~/.tmux.conf
 ```
 ln ~/dotfiles/userChrome.css .
 ```
+
+### .desktop files
+
+- add to ~/.local/share/applications/

@@ -9,7 +9,7 @@ local config = wezterm.config_builder()
 
 --config.initial_cols = 80
 --config.initial_rows = 28
-config.initial_cols = 92
+config.initial_cols = 96
 config.initial_rows = 32
 
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
@@ -36,15 +36,16 @@ config.hide_mouse_cursor_when_typing = false
 -- FONT
 -- 420 HELLO 1Il 0O8 ([{ != && |>
 config.font_size = 14
-config.font = wezterm.font 'CommitMono Nerd Font'
-config.line_height = 1.1
+--config.font = wezterm.font 'CommitMono Nerd Font'
 --config.font = wezterm.font 'JetBrains Mono'
 --config.font = wezterm.font('RecMonoLinear Nerd Font', {weight = 'Bold', italic = false})
 --config.font = wezterm.font 'RecMonoLinear Nerd Font'
 --config.font = wezterm.font 'RecMonoCasual Nerd Font' --more comic sans like
 --config.font = wezterm.font 'BerkeleyMonoTrial'
 --config.font = wezterm.font 'AtkinsonHyperlegibleMono'
---config.font = wezterm.font 'Iosevka'
+--config.line_height = 1.1
+--config.cell_width = 0.90
+config.font = wezterm.font 'Iosevka'
 --config.font = wezterm.font 'VictorMono'
 --config.font = wezterm.font('VictorMono', {weight='Bold'})
 --config.font = wezterm.font 'Adwaita Mono'
