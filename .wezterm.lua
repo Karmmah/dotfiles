@@ -17,10 +17,6 @@ config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 
 config.window_padding = {
-	--left = 26px,
-	--right = 26px,
-	--top = 20px,
-	--bottom = 20px,
 	left = '2cell',
 	right = '2cell',
 	top = '1cell',
@@ -34,23 +30,39 @@ config.hide_mouse_cursor_when_typing = false
 
 
 -- FONT
--- 420 HELLO 1Il 0O8 ([{ != && |>
-config.font_size = 14
+-- 420 HELLO 1Il 0O8B ([{ != && |> =>
 --config.font = wezterm.font 'CommitMono Nerd Font'
 --config.font = wezterm.font 'JetBrains Mono'
 --config.font = wezterm.font('RecMonoLinear Nerd Font', {weight = 'Bold', italic = false})
 --config.font = wezterm.font 'RecMonoLinear Nerd Font'
---config.font = wezterm.font 'RecMonoCasual Nerd Font' --more comic sans like
---config.font = wezterm.font 'BerkeleyMonoTrial'
 --config.font = wezterm.font 'AtkinsonHyperlegibleMono'
---config.line_height = 1.1
 --config.cell_width = 0.90
-config.font = wezterm.font 'Iosevka'
 --config.font = wezterm.font 'VictorMono'
 --config.font = wezterm.font('VictorMono', {weight='Bold'})
 --config.font = wezterm.font 'Adwaita Mono'
 --config.font = wezterm.font 'Sans Forgetica'
 --config.font = wezterm.font 'OpenDyslexicMono'
+
+--config.font_size = 14
+--config.line_height = 1.0
+--config.font = wezterm.font 'BerkeleyMonoTrial'
+
+--config.font_size = 14
+--config.line_height = 1.1
+--config.font = wezterm.font 'RecMonoCasual Nerd Font' --more comic sans like
+
+--config.font_size = 15
+--config.font = wezterm.font 'Iosevka'
+
+config.font_size = 13
+--config.font_size = 24 -- for 80 char width in vim fullscreen
+--config.line_height = 1.05 --for square checkerboard patterns
+config.line_height = 1.1
+config.font = wezterm.font '0xProto Nerd Font'
+
+--config.font_size = 16
+--config.line_height = 1.0
+--config.font = wezterm.font('Terminess Nerd Font Mono', {weight='Regular'})
 
 
 -- THEME
@@ -87,37 +99,6 @@ local IntensePlumDark = {
 		"#83edff",
 		"#eff8ff"
 	},
-}
-
--- sugar:10, artificial:10, sogginess:6, intense, Plum, just a splash
-local IntensePlumDark2 = {
-  foreground = "#deeef9",
-  background = "#0c2535",
-  cursor_bg = "#a0cdee",
-  cursor_border = "#f1f8fd",
-  cursor_fg = "#0c2535",
-  selection_bg = "#deeef9",
-  selection_fg = "#0c2535",
-  ansi = {
-    "#193e55",
-    "#ffccc3",
-    "#5aff8d",
-    "#ffd65e",
-    "#ccd9ff",
-    "#ffc4f9",
-    "#83edff",
-    "#a0cdee"
-  },
-  brights = {
-    "#367197",
-    "#ffece8",
-    "#d0ffd8",
-    "#fff0c8",
-    "#ebf1ff",
-    "#ffe9fc",
-    "#d5f8ff",
-    "#f1f8fd"
-  },
 }
 
 -- sugar:5, artificial:8, sogginess:4, intense, orange, go all in
@@ -213,37 +194,6 @@ local ClassicBlueberryDark = {
 	},
 }
 
--- sugar:10, artificial:10, sogginess:4, intense, blueberry, just a splash
-local IntenseBlueberryDark = {
-  foreground = "#dceff3",
-  background = "#122629",
-  cursor_bg = "#9fd1da",
-  cursor_border = "#f0f8fa",
-  cursor_fg = "#122629",
-  selection_bg = "#dceff3",
-  selection_fg = "#122629",
-  ansi = {
-    "#223f44",
-    "#ffccc3",
-    "#5aff8d",
-    "#ffd65e",
-    "#ccd9ff",
-    "#ffc4f9",
-    "#83edff",
-    "#9fd1da"
-  },
-  brights = {
-    "#44737b",
-    "#ffece8",
-    "#d0ffd8",
-    "#fff0c8",
-    "#ebf1ff",
-    "#ffe9fc",
-    "#d5f8ff",
-    "#f0f8fa"
-  },
-}
-
 -- sugar:5, artificial:8, sogginess:4, intense, blueberry, go all in
 local IntenseBlueberryLight = {
   foreground = "#223f44",
@@ -305,33 +255,77 @@ local IntenseKiwiLight = {
 	},
 }
 
-local IntenseKiwiDark = {
-	foreground = "#e9ece9",
-	background = "#1f2420",
-	cursor_bg = "#c1c9c2",
-	cursor_border = "#f5f7f6",
-	cursor_fg = "#1f2420",
-	selection_bg = "#e9ece9",
-	selection_fg = "#1f2420",
+local white1 = "f2f2f2"
+local black1 = "111111"
+local gray1 = "76787a"
+local green1 = "2daa72"
+local yellow1 = "e7bf4d"
+local blue1 = "6482f4" --"6d70d8"
+local red1 = "b8444e"
+local customDark = {
+	background = black1,
+	foreground = white1, --text
+	cursor_bg = red1,
+	cursor_border = black1,
+	cursor_fg = white1,
+	selection_bg = white1,
+	selection_fg = black1,
 	ansi = {
-		"#353c36",
-		"#f7afa3",
-		"#6be18a",
-		"#e7bf4d",
-		"#b0c2f7",
-		"#ecabe5",
-		"#5dd8ec",
-		"#c1c9c2"
+		black1,
+		yellow1, --values
+		green1, --language keywords
+		yellow1, --tmux scrolling, distrobox non running containers
+		blue1, --comments
+		green1, --macros, escape chars, cwd in shell
+		white1, --function names
+		gray1 --line numbers
 	},
 	brights = {
-		"#646d65",
-		"#facec6",
-		"#8ff5a7",
-		"#f7d782",
-		"#ced9fa",
-		"#f3ccee",
-		"#97eaf8",
-		"#f5f7f6"
+		gray1,
+		red1, --red
+		yellow1, --executable files
+		red1, --vim autocomplete highlight
+		green1, --directories
+		white1,
+		blue1, --soft links
+		white1
+	},
+}
+
+local black2 = black1
+local white2 = "f8f8f8"
+local gray2 = "adb4ba"
+local green2 = "289a68"
+local yellow2 = "deab2a"
+local blue2 = "4b64d3" --"5d61d1"
+local red2 = red1
+local customLight = {
+	background = white2,
+	foreground = black2,
+	cursor_bg = red2,
+	cursor_border = white2,
+	cursor_fg = white2,
+	selection_bg = black2,
+	selection_fg = white2,
+	ansi = {
+		white2,
+		yellow2, --values
+		green2, --language keywords
+		yellow2, --tmux scrolling, distrobox non running containers
+		blue2, --comments
+		green2, --macros, escape chars, cwd in shell
+		black2, --function names
+		gray2 --line numbers
+	},
+	brights = {
+		gray2,
+		red2, --red
+		yellow2, --executable files
+		red2, --vim autocomplete highlight
+		green2, --directories
+		black2,
+		blue2, --soft links
+		black2
 	},
 }
 
@@ -339,19 +333,18 @@ local appearance_themes = {
 	--Light = IntenseOrangeLight,
 	--Light = IntensePlumLight,
 	--Dark = IntensePlumDark,
-	--Dark = IntensePlumDark2,
 	--Dark = ClassicBlueberryDark,
 	--Light = IntenseBlueberryLight,
-	--Dark = IntenseBlueberryDark,
-	Light = IntenseKiwiLight,
-	Dark = IntenseKiwiDark
+	--Light = IntenseKiwiLight,
+	Light = customLight,
+	Dark = customDark
 }
 local selectedTheme = appearance_themes[wezterm.gui.get_appearance()] --select according to system light/dark mode
 config.colors = selectedTheme or dark_theme
 
-local windowFrameColor = selectedTheme.brights[8]
-	--local windowFrameColor = selectedTheme.foreground
-	config.window_frame = {
+--local windowFrameColor = selectedTheme.background
+local windowFrameColor = "edeeef"
+config.window_frame = {
 	border_left_width = '0.3cell',
 	border_right_width = '0.3cell',
 	border_bottom_height = '0.15cell',
