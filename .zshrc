@@ -1,88 +1,108 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt extendedglob
-#bindkey -v
-# End of lines configured by zsh-newuser-install
+# ======================================
+#  ZSH Configuration
+# ======================================
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/pk/.zshrc'
+# --- History ---
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY SHARE_HISTORY
 
+# --- Completion ---
 autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-
-# enable color for ls command
-alias ls='ls --color=auto'
-
-
-# distrobox status display
-local container_info=""
-if [ -n "$CONTAINER_ID" ]; then
-	#container_info="[%F{green}Distrobox:%F{blue}${CONTAINER_ID}%F{green}]%f "
-	container_info="%F{blue}${CONTAINER_ID}%f "
+if [[ -n ${ZSH_VERSION} ]]; then
+  if [[ -f ~/.zcompdump && ! ~/.zcompdump -nt ~/.zshrc ]]; then
+    compinit -i
+  else
+    compinit
+  fi
 fi
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-
-## exit code display
-#prevExitCode=$?
-#exitCodeDisp="${prevExitCode}"
-#if [ $prevExitCode -eq 1 ]; then
-#	exitCodeDisp=$exitCodeDisp" generic"
-#elif [ $prevExitCode -eq 2 ]; then
-#	exitCodeDisp=$exitCodeDisp" command"
-#elif [ $prevExitCode -eq 126 ]; then
-#	exitCodeDisp=$exitCodeDisp" permission"
-#elif [ $prevExitCode -eq 127 ]; then
-#	exitCodeDisp=$exitCodeDisp" path resolution"
-#elif [ $prevExitCode -eq 130 ]; then
-#	exitCodeDisp=$exitCodeDisp" interrupted"
-#elif [ $prevExitCode -eq 255 ]; then
-#	exitCodeDisp=$exitCodeDisp" other"
-#fi
-
-#PROMPT='
-#${container_info}%F{yellow}%/ %(?.%F{green}suc.%F{red}fail:%?)%f%b
-#%F{green}%# >%f '
-
-#PROMPT='%(?..%F{red}fail:%? )
-#${container_info}%F{5}%/%f%b
-#%F{green}%# %F{green}>%f '
-
-PROMPT='%(?..%F{red}fail:%? )${container_info}%F{5}%/%f%b
-%F{green}%# %F{green}>%f '
-
-#setopt PROMPT_SUBST #see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
-
-
-# git status display on right side
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info } #hook function executed before actual prompt
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-RPROMPT=\$vcs_info_msg_0_ #'right'-aligned prompt
-#zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
-zstyle ':vcs_info:git:*' formats '%F{240}(%b)%f'
-zstyle ':vcs_info:*' enable git
-
-
-# autocompletion/-suggestion
-# switch autocomplete mode to show all possibilities
-#autoload -Uz compinit
-#compinit
-#zstyle ':completion:*' accept-exact false
-if [ -d "$HOME/.zsh/zsh-autosuggestions/" ]; then
-	source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-	ZSH_AUTOSUGGEST_STRATEGY=(completion)
+# --- Autosuggestions ---
+if [[ -d "$HOME/.zsh/zsh-autosuggestions" ]]; then
+  source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  ZSH_AUTOSUGGEST_STRATEGY=(completion)
 else
-	echo "zsh-autosuggestions not installed"
-	echo "use git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/zsh-autosuggestions"
+  print "zsh-autosuggestions not available, get zsh-autosuggestions on github"
 fi
 
+# --- Globbing ---
+setopt GLOB_DOTS NO_CASE_GLOB
 
-# aliases
+# Distrobox status
+typeset -g container_info
+if [[ -n "$CONTAINER_ID" ]]; then
+  container_info="%F{blue}${CONTAINER_ID}%f "
+else
+  container_info=""
+fi
+
+# --- Prompt ---
+setopt PROMPT_SUBST
+PROMPT='%(?..%F{9}fail:%? )${container_info}%F{5}%/
+%F{5}%#%f '
+# Explanation:
+#   First line: red fail if last command failed; current path in color
+#   Second line: %# (shows % for normal user, # for root)
+
+# --- Git Info ---
+precmd_functions+=(git_rprompt)
+git_rprompt() {
+    if ! command -v git >/dev/null 2>&1; then
+        RPROMPT="%F{8}git?"
+    else
+        RPROMPT="%F{8}$(git symbolic-ref --short HEAD 2>/dev/null)"
+    fi
+}
+
+# --- Aliases ---
+
+alias ls='ls --color=auto'
+alias ll='ls -lh'
+alias la='ls -lhA'
+alias l='ls -lh'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
 alias db='distrobox'
 alias dbe='distrobox enter'
 alias dbl='distrobox list'
+alias dbu='distrobox upgrade'
+alias dbs='distrobox stop'
+
+alias img='flatpak run org.wezfurlong.wezterm imgcat'
+
+# --- Quality of Life ---
+setopt AUTO_CD
+setopt CORRECT
+#setopt IGNORE_EOF #disables Ctrl+D exit of terminal
+setopt NOTIFY
+setopt NUMERIC_GLOB_SORT
+
+# --- Cursor Movement ---
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+
+# Environment variables for consistency to always use the same tools for certain tasks
+
+## --- Editor ---
+#export EDITOR=nano
+#export VISUAL=nano
+
+# --- Pager ---
+#export PAGER=less
+export LESS='-R -M --shift 5'
+
+
+# Remove the error 'tty: ttyname error: No such device'
+clear
