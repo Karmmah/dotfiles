@@ -79,7 +79,11 @@ alias dbl='distrobox list'
 alias dbu='distrobox upgrade'
 alias dbs='distrobox stop'
 
-alias img='flatpak run org.wezfurlong.wezterm imgcat'
+alias lechat='vibe'
+
+#alias wezterm='flatpak run org.wezfurlong.wezterm'
+
+alias open='xdg-open'
 
 # --- Quality of Life ---
 setopt AUTO_CD
