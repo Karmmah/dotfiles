@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=KeepassWithPasting
+Exec=flatpak run org.keepassxc.KeePassXC -platform xcb
+Type=Application
+Terminal=false
+Categories=Application;
+Icon=/home/pk/.local/share/flatpak/app/org.keepassxc.KeePassXC/current/active/files/share/icons/hicolor/scalable/apps/org.keepassxc.KeePassXC.svg
+Comment=Launch Keepass with Autotype enabled.

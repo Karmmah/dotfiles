@@ -12,7 +12,8 @@ local config = wezterm.config_builder()
 config.initial_cols = 96
 config.initial_rows = 32
 
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+--config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.window_decorations = "NONE"
 --config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 
@@ -39,19 +40,18 @@ config.hide_mouse_cursor_when_typing = false
 --config.line_height = 1.0
 --config.font = wezterm.font 'BerkeleyMonoTrial'
 
---config.font_size = 14
---config.line_height = 1.1
---config.font = wezterm.font 'RecMonoCasual Nerd Font' --more comic sans like
-
+-- https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/Iosevka.zip
 --config.font_size = 15
 --config.font = wezterm.font 'Iosevka'
 
+-- https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/0xProto.zip
 --config.font_size = 13
 ----config.font_size = 24 -- for 80 char width in vim fullscreen
 ----config.line_height = 1.05 --for square checkerboard patterns
 --config.line_height = 1.1
 --config.font = wezterm.font '0xProto Nerd Font'
 
+-- https://github.com/tywr/Nordwand-Mono/releases/download/1.3.0/NordwandMono-OTF.zip
 config.font_size = 14
 config.font = wezterm.font 'Nordwand Mono'
 
