@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+WALLPAPER_DIR=$HOME/Pictures/wallpapers
+WALLPAPER_STATE_DIR=$HOME/.local/state
+WALLPAPER_STATE_FILE=current-wallpaper
+
+mkdir -p $WALLPAPER_DIR
+mkdir -p $WALLPAPER_STATE_DIR
+
+SELECTED=$(find $WALLPAPER_DIR -maxdepth 1 -type f \
+	\( -iname '*.jpg' -o -iname '*.jpg' -o -iname '*.png' -o -iname '*.webp' \) \
+	-print | sort | fuzzel --dmenu -w 80 --prompt "'Select Wallpaper:' " \
+)
+
+# stop if no wallpaper is selected (e.g. fuzzel is closed)
+[ -z "$SELECTED" ] && exit 0
+
+# update wallpaper status
+echo "$SELECTED" > $WALLPAPER_STATE_DIR/$WALLPAPER_STATE_FILE
+
+pkill swaybg
+
+swaybg -i "$SELECTED" -m fill &
+
+exit 0

@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+WALLPAPER_DIR=$HOME/Pictures/wallpapers
+WALLPAPER_STATE_DIR=$HOME/.local/state
+WALLPAPER_STATE_FILE=current-wallpaper
+
+mkdir -p $WALLPAPER_DIR
+mkdir -p $WALLPAPER_STATE_DIR
+
+# check if current wallpaper still exists
+if [ -f $WALLPAPER_STATE_DIR/$WALLPAPER_STATE_FILE ]; then
+	WALLPAPER=$(more $WALLPAPER_STATE_DIR/$WALLPAPER_STATE_FILE)
+fi
+
+if [ -z "$WALLPAPER" ] || [ ! -f "$WALLPAPER" ]; then
+	exec wallpaper-selector && exit 0
+fi
+
+swaybg -i "$WALLPAPER" -m fill &
+
+exit 0

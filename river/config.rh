@@ -1,0 +1,222 @@
+env {
+    SDL_VIDEODRIVER wayland,x11
+    QT_QPA_PLATFORM wayland
+    ELECTRON_OZONE_PLATFORM_HINT wayland
+    QT_QPA_PLATFORMTHEME qt6ct
+    GTK_CSD 0
+    XDG_CURRENT_DESKTOP wlr
+    # XDG_SESSION_TYPE wayland
+    # XDG_SESSION_DESKTOP river
+}
+
+workspacerules [
+    id, -1, onEmpty, launch, foot
+    id, [0-4], layout, bsp
+    id, [5], layout, monocle
+    id, [6-8 9 10], layout, scrolling
+    any, pinToOutput, none
+]
+
+layout_config {
+    bsp {
+        # split_override 1, 1
+        smart_gaps false
+        gaps 9
+    }
+    scrolling {
+        gaps 10
+        initial_width 0.7
+        center_only_one false
+    }
+    monocle {
+        gaps 10
+    }
+}
+
+animations {
+    move {
+        duration 150_000
+        easing circInOut
+    }
+    resize {
+        duration 150_000
+        easing circInOut
+    }
+    workspace {
+        duration 150_000
+        easing circInOut
+    }
+}
+
+xcursor {
+    theme Remus-White
+    size 24
+}
+
+keybinds [
+    super, q, close, Focus
+    super, m, exit
+    super, Escape, pointerOp, xkill
+    super, Return, launch, foot
+    super, space, launch, fuzzel
+    #none, Print, launch, grim - | tee /tmp/scrt.png | wl-copy
+    #ctrl, Print, launch, grim -g "$(slurp)" - | tee /tmp/rscrt.png | wl-copy
+    none, Print, launch, grim - | tee /tmp/scrt.png | wl-copy
+    super, e, launch, thunar
+    super, b, launch, flatpak run app.zen_browser.zen
+
+    super, f, fullscreen, toggle, Focus
+    super, Tab, focusWorkspace, PrevActive
+    super, v, floating, toggle, Focus
+    super, s, layoutCommand, bsp, changeSplit
+    super+shift, s, layoutCommand, bsp, swapAllSplits
+    super, o, overlay, toggle, -1
+    super+shift, o, sendToWorkspace, -1
+
+    none, XF86MonBrightnessUp, launch, brightnessctl set 10%+
+    none, XF86MonBrightnessDown, launch, brightnessctl set 10%-
+
+    none, XF86AudioMute, launch, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    none, XF86AudioRaiseVolume, launch, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+    none, XF86AudioLowerVolume, launch, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+    none, XF86AudioMicMute, launch, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+    none, XF86AudioPlay, launch, playerctl play-pause
+    none, XF86AudioNext, launch, playerctl next
+    none, XF86AudioPrev, launch, playerctl previous
+
+    super, h, moveFocus, Left
+    super, l, moveFocus, Right
+    super, j, moveFocus, Down
+    super, k, moveFocus, Up
+
+    super, Left, moveFocus, Left
+    super, Right, moveFocus, Right
+    super, Down, moveFocus, Down
+    super, Up, moveFocus, Up
+
+    ctrl+super, Left, focusWorkspace, Previous
+    ctrl+super, Right, focusWorkspace, Next
+
+    super+shift, h, moveWindow, Left
+    super+shift, l, moveWindow, Right
+    super+shift, j, moveWindow, Down
+    super+shift, k, moveWindow, Up
+
+    super+shift, Left, moveWindow, Left
+    super+shift, Right, moveWindow, Right
+    super+shift, Down, moveWindow, Down
+    super+shift, Up, moveWindow, Up
+
+    super, 1, focusWorkspace, 0
+    super, 2, focusWorkspace, 1
+    super, 3, focusWorkspace, 2
+    super, 4, focusWorkspace, 3
+    super, 5, focusWorkspace, 4
+    super, 6, focusWorkspace, 5
+    super, 7, focusWorkspace, 6
+    super, 8, focusWorkspace, 7
+    super, 9, focusWorkspace, 8
+    super, 0, focusWorkspace, 9
+
+    super+shift, 1, moveToWorkspace, 0
+    super+shift, 2, moveToWorkspace, 1
+    super+shift, 3, moveToWorkspace, 2
+    super+shift, 4, moveToWorkspace, 3
+    super+shift, 5, moveToWorkspace, 4
+    super+shift, 6, moveToWorkspace, 5
+    super+shift, 7, moveToWorkspace, 6
+    super+shift, 8, moveToWorkspace, 7
+    super+shift, 9, moveToWorkspace, 8
+    super+shift, 0, moveToWorkspace, 9
+
+    super+ctrl, 1, sendToWorkspace, 0
+    super+ctrl, 2, sendToWorkspace, 1
+    super+ctrl, 3, sendToWorkspace, 2
+    super+ctrl, 4, sendToWorkspace, 3
+    super+ctrl, 5, sendToWorkspace, 4
+    super+ctrl, 6, sendToWorkspace, 5
+    super+ctrl, 7, sendToWorkspace, 6
+    super+ctrl, 8, sendToWorkspace, 7
+    super+ctrl, 9, sendToWorkspace, 8
+    super+ctrl, 0, sendToWorkspace, 9
+
+    super, t, pin, Focus, enable
+    super+shift, t, pin, Focus, disable
+]
+
+pointer_binds [
+    super, Left, pointerOp, move
+    super, Right, pointerOp, resize
+]
+
+
+window_management {
+    pointer_follows_focus false
+    focus_follows_pointer false
+    float_move 0.1
+    border {
+        width 4
+            colours {
+                pinned rgb8, 0xB0, 0xA0, 0x40
+                #focus rgba8, 0, 0xA0, 0, 0xAA
+                focus hsl, 2, 0.6, 0.4, 0.7
+                inactive hsla, 1, 0, 0.0, 0.3
+            }
+    }
+}
+
+windowrules [
+    #appid, com.mitchellh.ghostty, workspace, 1
+    appid, zenity, float, true
+    appid, pavucontrol, float, true
+]
+
+startup [
+    dbus-update-activation-environment --all --systemd
+    #kanshi
+    #wayneko --layer top --follow-pointer false
+]
+
+# input options require https://codeberg.org/Sivecano/channel (config options are listed there)
+input {
+    profiles {
+        keyboard {
+            keyboard {
+                layout de
+                options caps:escape_shifted_capslock, altwin:swap_lalt_lwin
+            }
+        }
+        touchpad {
+            pointer {
+                scroll_factor 0.2
+            }
+            libinput {
+                natural_scroll true
+                tap_to_click true
+                accel_profile adaptive
+                accel_speed 0.1
+            }
+        }
+        trackpoint {
+            pointer {
+                scroll_factor 0.7
+            }
+            libinput {
+                accel_profile adaptive
+                accel_speed 0.05
+            }
+        }
+        touch {
+        }
+        tablet {
+        }
+    }
+    rules [
+        name, *TouchPad, touchpad
+        name, *TrackPoint, trackpoint
+        type, keyboard, keyboard
+        type, tablet, tablet
+        type, touch, touch
+    ]
+}

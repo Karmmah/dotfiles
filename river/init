@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+rhine >> /tmp/rhine.log 2>&1 &
+
+channel >> /tmp/channel.log 2>&1 &
+
+openrc -U gui >> /tmp/openrc.log 2>&1 &
+
+start-wallpaper >> /tmp/start-wallpaper.log 2>&1 &
+
+waybar >> /tmp/waybar.log 2>&1 &
+
+#mako >> /tmp/mako.log 2>&1 &
+dunst >> /tmp/dunst.log 2>&1 &
+
+flatpak run me.timschneeberger.jdsp4linux --tray >> /tmp/jamesdsp.log 2>&1 &
+
+exit 0
