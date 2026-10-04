@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+cd $HOME
+
 # install essential packages
 doas apk add \
 	tmux vim git htop \
@@ -13,7 +15,7 @@ doas apk add \
 	libxkbcommon-dev dbus-dev libinput \
 	wezterm-fonts \
 	pavucontrol grip slurp zenity \
-	man-pages man-db doas-doc \
+	man-pages man-db doas-doc
 
 # set up user groups
 doas addgroup \
@@ -62,12 +64,12 @@ mkdir -p \
 # set up window manager
 git clone https://codeberg.org/sivecano/rhine.git
 cd rhine
-zig build -Doptimize=ReleaseSafe
+zig build -Doptimize=ReleaseSafe &&
 cp zig-out/bin/* ~/.local/bin/
 cd $HOME
 git clone https://codeberg.org/sivecano/channel.git
 cd channel
-zig build -Doptimize=ReleaseSafe
+zig build -Doptimize=ReleaseSafe &&
 cp zig-out/bin/* ~/.local/bin/
 cd $HOME
 
@@ -81,8 +83,8 @@ doas apk add \
 	thunar thunar-doc gvfs
 
 # set up config files
-doas ln -s $HOME/dotfiles/alpine-river/greetd/config.toml /etc/greetd/config.toml
-doas ln -s $HOME/dotfiles/alpine-river/river-session /usr/bin/river-session
+doas ln -s $HOME/dotfiles/alpine-river/greetd/config.toml /etc/greetd/config.toml &&
+doas ln -s $HOME/dotfiles/alpine-river/river-session /usr/bin/river-session &&
 ln -s $HOME/dotfiles/xdg-desktop-portal/portals.conf $HOME/.config/xdg-desktop-portal
 ln -s $HOME/dotfiles/river/scripts/gtkthemes $HOME/.config/river/scripts/gtkthemes
 ln -s $HOME/dotfiles/waybar/config.jsonc $HOME/.config/waybar/config.jsonc 
