@@ -226,6 +226,7 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
+	// https://man.archlinux.org/man/extra/waybar/waybar-menu.5.en
     "custom/power": {
         //"format" : "⏻ ",
         "format" : " ", // 
