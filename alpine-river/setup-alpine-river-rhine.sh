@@ -1,6 +1,23 @@
 #!/usr/bin/env sh
 
+user_confirm() {
+	local block_name=$1
+	read -p $(echo -e "Input:\f") response
+	case "$response" in
+		[yY]|[yY][eE][sS])
+			return 0
+			;;
+		*)
+			return 1
+			;;
+	esac
+}
+
 cd $HOME
+
+#if user_confirm "Run setup-alpine"; then
+#	setup-alpine
+#fi
 
 # install essential packages
 doas apk add \
@@ -11,10 +28,10 @@ doas apk add \
 	xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
 	tlp brightnessctl power-profiles-daemon networkmanager networkmanager-bluetooth \
 	build-base pkgconf zig river-dev \
-	wayland-dev wayland-protocols wayland-scanner \
+	wayland-dev wayland-protocols \
 	libxkbcommon-dev dbus-dev libinput \
 	wezterm-fonts \
-	pavucontrol grip slurp zenity \
+	pavucontrol grim slurp zenity \
 	man-pages man-db doas-doc
 
 # set up user groups
@@ -45,8 +62,8 @@ rc-update -U add pipewire-pulse gui
 #rc-service -U wireplumber start
 
 # set up directories
+doas mkdir -p /etc/greetd
 mkdir -p \
-	/etc/greetd \
 	$HOME/.config \
 	$HOME/.config/xdg-desktop-portal \
 	$HOME/.config/river \
@@ -61,20 +78,24 @@ mkdir -p \
 	$HOME/Downloads \
 	$HOME/Pictures
 
-# set up window manager
-git clone https://codeberg.org/sivecano/rhine.git
-cd rhine
-zig build -Doptimize=ReleaseSafe &&
-cp zig-out/bin/* ~/.local/bin/
-cd $HOME
-git clone https://codeberg.org/sivecano/channel.git
-cd channel
-zig build -Doptimize=ReleaseSafe &&
-cp zig-out/bin/* ~/.local/bin/
-cd $HOME
+echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.profile
 
-ln -s $HOME/dotfiles/alpine-river/start-wallpaper $HOME/.local/bin
-ln -s $HOME/dotfiles/alpine-river/wallpaper-selector $HOME/.local/bin
+if user_confirm "Set up and compile River Window Manager"; then
+	# set up window manager
+	git clone https://codeberg.org/sivecano/rhine.git
+	cd rhine
+	zig build -Doptimize=ReleaseSafe &&
+	cp zig-out/bin/* ~/.local/bin/
+	cd $HOME
+	git clone https://codeberg.org/sivecano/channel.git
+	cd channel
+	zig build -Doptimize=ReleaseSafe &&
+	cp zig-out/bin/* ~/.local/bin/
+	cd $HOME
+fi
+
+ln $HOME/dotfiles/alpine-river/start-wallpaper $HOME/.local/bin
+ln $HOME/dotfiles/alpine-river/wallpaper-selector $HOME/.local/bin
 
 # install optional software
 doas apk add \
@@ -83,8 +104,8 @@ doas apk add \
 	thunar thunar-doc gvfs
 
 # set up config files
-doas ln -s $HOME/dotfiles/alpine-river/greetd/config.toml /etc/greetd/config.toml &&
-doas ln -s $HOME/dotfiles/alpine-river/river-session /usr/bin/river-session &&
+doas ln $HOME/dotfiles/alpine-river/greetd/config.toml /etc/greetd/config.toml &&
+doas ln $HOME/dotfiles/alpine-river/river-session /usr/bin/river-session &&
 ln -s $HOME/dotfiles/xdg-desktop-portal/portals.conf $HOME/.config/xdg-desktop-portal
 ln -s $HOME/dotfiles/river/scripts/gtkthemes $HOME/.config/river/scripts/gtkthemes
 ln -s $HOME/dotfiles/waybar/config.jsonc $HOME/.config/waybar/config.jsonc 
@@ -102,10 +123,11 @@ ln -s $HOME/dotfiles/fish/* $HOME/.config/fish
 # set up distrobox
 doas apk add distrobox distrobox-doc \
 # from distrobox documentation
-echo "$(whoami):10000:65536" > /etc/subuid
-echo "$(whoami):10000:65536" > /etc/subgid
+doas echo "$(whoami):100000:65536" > /etc/subuid
+doas echo "$(whoami):100000:65536" > /etc/subgid
 
-# set up flatpak
-doas apk add flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install zen typesetter jdsp org.torproject.torbrowser-launcher vieb qview sioyek kwrite characters
+if user_confirm "Set up Flatpak"; then
+	doas apk add flatpak
+	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+	flatpak install zen typesetter jdsp org.torproject.torbrowser-launcher vieb qview sioyek kwrite characters
+fi
