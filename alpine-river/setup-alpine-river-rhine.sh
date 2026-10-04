@@ -33,14 +33,14 @@ doas apk add \
 	libxkbcommon-dev dbus-dev libinput \
 	wezterm-fonts \
 	pavucontrol grim slurp zenity \
-	man-pages man-db doas-doc &&
+	man-pages man-db doas-doc \
+	&&
 
 # set up user groups
-doas addgroup \
-	pk wheel \
-	pk video \
-	pk audio \
-	pk input
+doas addgroup pk wheel
+doas addgroup pk video
+doas addgroup pk audio
+doas addgroup pk input 
 
 # set up services
 doas rc-update add dbus
