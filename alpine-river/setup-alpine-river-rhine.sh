@@ -40,6 +40,7 @@ doas apk add \
 	thunar thunar-doc gvfs
 
 # switch shell
+#https://wiki.alpinelinux.org/wiki/Shell_management
 doas chsh
 
 # set up directories
