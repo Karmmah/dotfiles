@@ -96,7 +96,9 @@ if user_confirm "Set up and compile River Window Manager"; then
 fi
 
 ln $HOME/dotfiles/alpine-river/start-wallpaper $HOME/.local/bin
+chmod +x $HOME/.local/bin/start-wallpaper
 ln $HOME/dotfiles/alpine-river/wallpaper-selector $HOME/.local/bin
+chmod +x $HOME/.local/bin/wallpaper-selector
 
 # install optional software
 doas apk add \
@@ -105,18 +107,23 @@ doas apk add \
 	thunar thunar-doc gvfs
 
 # set up config files
-doas ln $HOME/dotfiles/alpine-river/greetd/config.toml /etc/greetd/config.toml &&
-doas ln $HOME/dotfiles/alpine-river/river-session /usr/bin/river-session &&
+doas cp $HOME/dotfiles/alpine-river/greetd/config.toml /etc/greetd/config.toml &&
+doas cp $HOME/dotfiles/alpine-river/river-session /usr/local/bin/river-session &&
+doas chmod +x /usr/local/bin/river-session
 ln -s $HOME/dotfiles/xdg-desktop-portal/portals.conf $HOME/.config/xdg-desktop-portal
+ln -s $HOME/dotfiles/river/init $HOME/.config/river/
+doas chmod +x $HOME/.config/river/init
+ln -s $HOME/dotfiles/river/config.rh $HOME/.config/river/
 ln -s $HOME/dotfiles/river/scripts/gtkthemes $HOME/.config/river/scripts/gtkthemes
 ln -s $HOME/dotfiles/waybar/config.jsonc $HOME/.config/waybar/config.jsonc 
 ln -s $HOME/dotfiles/waybar/style.css $HOME/.config/waybar/style.css
 ln -s $HOME/dotfiles/fuzzel/fuzzel.ini $HOME/.config/fuzzel/fuzzel.ini 
-ln -s $HOME/dotfiles/river/config.rh $HOME/.config/river/
 ln -s $HOME/dotfiles/foot/foot.ini $HOME/.config/foot/
 
 # switch shell
-doas apk add fish shadow
+doas apk add fish shadow &&
+echo "Available shells:"
+more /etc/shells
 doas chsh
 mkdir -p $HOME/.config/fish
 ln -s $HOME/dotfiles/fish/* $HOME/.config/fish
