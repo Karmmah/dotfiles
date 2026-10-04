@@ -1,8 +1,9 @@
 #!/usr/bin/env sh
 
 user_confirm() {
-	local block_name=$1
-	read -p $(echo -e "Input:\f") response
+	block_name=$1
+	printf "Confirm %s? [y/N] " "$block_name"
+	read response
 	case "$response" in
 		[yY]|[yY][eE][sS])
 			return 0
