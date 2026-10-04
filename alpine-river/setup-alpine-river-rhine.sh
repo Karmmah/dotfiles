@@ -20,11 +20,13 @@ cd $HOME
 #	setup-alpine
 #fi
 
+USER_NAME="$(id -un)"
+
 # install essential packages
 doas apk add \
 	tmux vim git htop \
 	river swaybg mako dbus dbus-openrc wl-clipboard xwayland \
-	greetd greetd-tuigreet elogind elogind-openrc linux-pam util-linux-login polkit-elogind eudev eudev-openrc \
+	greetd greetd-openrc greetd-tuigreet elogind elogind-openrc linux-pam util-linux-login polkit-elogind eudev eudev-openrc \
 	pipewire pipewire-openrc pipewire-pulse pipewire-pulse-openrc wireplumber wireplumber-openrc \
 	xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
 	tlp brightnessctl power-profiles-daemon networkmanager networkmanager-bluetooth \
@@ -37,24 +39,20 @@ doas apk add \
 	&&
 
 # set up user groups
-doas addgroup pk wheel
-doas addgroup pk video
-doas addgroup pk audio
-doas addgroup pk input 
+doas addgroup "$USER_NAME"wheel
+doas addgroup "$USER_NAME"video
+doas addgroup "$USER_NAME"audio
+doas addgroup "$USER_NAME"input 
 
 # set up services
-doas rc-update add dbus
-doas rc-update add greetd
 doas rc-update add dbus default
 doas rc-update add elogind default
 doas rc-update add udev default
 doas rc-update add greetd default
 #doas rc-service dbus start
-#doas rc-service greetd start
-#doas rc-service add dbus default
-#doas rc-service dbus start
 #doas rc-service elogind start
 #doas rc-service udev start
+#doas rc-service greetd start
 rc-update -U add pipewire gui
 rc-update -U add wireplumber gui
 rc-update -U add pipewire-pulse gui
@@ -129,10 +127,12 @@ mkdir -p $HOME/.config/fish
 ln -s $HOME/dotfiles/fish/* $HOME/.config/fish
 
 # set up distrobox
-doas apk add distrobox distrobox-doc \
+doas apk add distrobox distrobox-doc
 # from distrobox documentation
-doas echo "$(whoami):100000:65536" > /etc/subuid
-doas echo "$(whoami):100000:65536" > /etc/subgid
+#doas echo "$(whoami):100000:65536" > /etc/subuid
+#doas echo "$(whoami):100000:65536" > /etc/subgid
+doas sh -c 'echo "$(whoami):100000:65536" >> /etc/subuid'
+doas sh -c 'echo "$(whoami):100000:65536" >> /etc/subgid'
 
 if user_confirm "Set up Flatpak"; then
 	doas apk add flatpak

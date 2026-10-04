@@ -10,3 +10,7 @@
 - install git
 
 - clone dotfiles git repo
+
+- make setup script executable "chmod +x ~/dotfiles/alpine-river/setup-alpine-river-rhine.sh"
+
+- run script (not as root)
