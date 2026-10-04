@@ -33,7 +33,7 @@ doas apk add \
 	libxkbcommon-dev dbus-dev libinput \
 	wezterm-fonts \
 	pavucontrol grim slurp zenity \
-	man-pages man-db doas-doc
+	man-pages man-db doas-doc &&
 
 # set up user groups
 doas addgroup \
