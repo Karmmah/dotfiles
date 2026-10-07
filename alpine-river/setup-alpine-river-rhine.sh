@@ -26,10 +26,12 @@ USER_NAME="$(id -un)"
 doas apk add \
 	tmux vim git htop \
 	river swaybg mako dbus dbus-openrc wl-clipboard xwayland \
-	greetd greetd-openrc greetd-tuigreet elogind elogind-openrc linux-pam util-linux-login polkit-elogind eudev eudev-openrc \
+	greetd greetd-openrc greetd-tuigreet \
+	elogind elogind-openrc linux-pam util-linux-login polkit-elogind eudev eudev-openrc \
 	pipewire pipewire-openrc pipewire-pulse pipewire-pulse-openrc wireplumber wireplumber-openrc \
 	xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
-	tlp brightnessctl power-profiles-daemon networkmanager networkmanager-bluetooth \
+	tlp brightnessctl power-profiles-daemon \
+	networkmanager networkmanager-openrc networkmanager-bluetooth networkmanager-wifi \
 	build-base pkgconf zig river-dev \
 	wayland-dev wayland-protocols \
 	libxkbcommon-dev dbus-dev libinput \
@@ -39,10 +41,11 @@ doas apk add \
 	&&
 
 # set up user groups
-doas addgroup "$USER_NAME"wheel
-doas addgroup "$USER_NAME"video
-doas addgroup "$USER_NAME"audio
-doas addgroup "$USER_NAME"input 
+doas addgroup "$USER_NAME" wheel
+doas addgroup "$USER_NAME" video
+doas addgroup "$USER_NAME" audio
+doas addgroup "$USER_NAME" input 
+doas addgroup "$USER_NAME" plugdev
 
 # set up services
 doas rc-update add dbus default
