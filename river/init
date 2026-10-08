@@ -11,7 +11,6 @@ start-wallpaper >> /tmp/start-wallpaper.log 2>&1 &
 waybar >> /tmp/waybar.log 2>&1 &
 
 mako >> /tmp/mako.log 2>&1 &
-#dunst >> /tmp/dunst.log 2>&1 &
 
 #flatpak run me.timschneeberger.jdsp4linux --tray >> /tmp/jamesdsp.log 2>&1 &
 
