@@ -16,25 +16,21 @@ user_confirm() {
 
 cd $HOME
 
-#if user_confirm "Run setup-alpine"; then
-#	setup-alpine
-#fi
-
 USER_NAME="$(id -un)"
 
 # install essential packages
 doas apk add \
-	tmux vim git htop \
+	tmux git vim htop \
 	greetd greetd-openrc greetd-tuigreet \
 	elogind elogind-openrc linux-pam util-linux-login polkit-elogind eudev eudev-openrc \
 	pipewire pipewire-openrc pipewire-pulse pipewire-pulse-openrc wireplumber wireplumber-openrc \
 	xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
 	tlp brightnessctl power-profiles-daemon \
 	networkmanager networkmanager-openrc networkmanager-bluetooth networkmanager-wifi \
-	build-base pkgconf zig river-dev \
-	river swaybg mako dbus dbus-openrc wl-clipboard xwayland \
-	wayland-dev wayland-protocols \
-	libxkbcommon-dev dbus-dev libinput \
+	build-base pkgconf zig \
+	river river-dev swaybg mako dbus dbus-dev dbus-openrc \
+	wayland-dev wayland-protocols wl-clipboard xwayland \
+	libxkbcommon-dev libinput \
 	wezterm-fonts \
 	pavucontrol grim slurp zenity \
 	man-pages man-db doas-doc \
@@ -70,16 +66,17 @@ doas rc-update add dbus default
 doas rc-update add elogind default
 doas rc-update add udev default
 doas rc-update add greetd default
-#doas rc-service dbus start
-#doas rc-service elogind start
-#doas rc-service udev start
-#doas rc-service greetd start
+doas rc-service dbus start
+doas rc-service elogind start
+doas rc-service udev start
+doas rc-service greetd start
+
 rc-update -U add pipewire gui
 rc-update -U add wireplumber gui
 rc-update -U add pipewire-pulse gui
-#rc-service -U pipewire start
-#rc-service -U pipewire-pulse start
-#rc-service -U wireplumber start
+rc-service -U pipewire start
+rc-service -U pipewire-pulse start
+rc-service -U wireplumber start
 
 echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.profile
 
@@ -98,6 +95,7 @@ if user_confirm "Set up and compile River Window Manager"; then
 	cd $HOME
 fi
 
+# set up wallpaper selection and automatic loading
 ln $HOME/dotfiles/alpine-river/start-wallpaper $HOME/.local/bin
 chmod +x $HOME/.local/bin/start-wallpaper
 ln $HOME/dotfiles/alpine-river/wallpaper-selector $HOME/.local/bin
@@ -105,9 +103,9 @@ chmod +x $HOME/.local/bin/wallpaper-selector
 
 # switch shell
 doas apk add fish shadow &&
-echo "Available shells:"
+echo ">>> Available shells:"
 more /etc/shells
-doas chsh
+chsh
 mkdir -p $HOME/.config/fish
 ln -s $HOME/dotfiles/fish/* $HOME/.config/fish
 
@@ -132,14 +130,15 @@ ln -s $HOME/dotfiles/fuzzel/fuzzel.ini $HOME/.config/fuzzel/fuzzel.ini
 ln -s $HOME/dotfiles/foot/foot.ini $HOME/.config/foot/
 
 # set up fonts
-wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/0xProto.zip"
-unzip 0xProto.zip
-mv 0xProtoNerdFont* $HOME/.local/share/fonts
-rm 0xProto.zip
-wget "https://github.com/tywr/Nordwand-Mono/releases/download/1.3.1/NordwandMono-OTF.zip"
-unzip NordwandMono-OTF.zip
-mv NordwandMono* $HOME/.local/share/fonts
-rm NordwandMono-OTF.zip
+#wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/0xProto.zip"
+#unzip 0xProto.zip
+#mv 0xProtoNerdFont* $HOME/.local/share/fonts
+#rm 0xProto.zip
+#wget "https://github.com/tywr/Nordwand-Mono/releases/download/1.3.1/NordwandMono-OTF.zip"
+#unzip NordwandMono-OTF.zip
+#mv NordwandMono* $HOME/.local/share/fonts
+#rm NordwandMono-OTF.zip
+doas apk add font-nerd-fonts-symbols
 
 # set up distrobox
 doas apk add distrobox distrobox-doc
@@ -148,7 +147,7 @@ doas apk add distrobox distrobox-doc
 #doas echo "$(whoami):100000:65536" > /etc/subgid
 doas sh -c 'echo "$(whoami):100000:65536" >> /etc/subuid'
 doas sh -c 'echo "$(whoami):100000:65536" >> /etc/subgid'
-doas rc-service cgroups start
+#doas rc-service cgroups start
 
 if user_confirm "Set up Flatpak"; then
 	doas apk add flatpak
