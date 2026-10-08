@@ -136,6 +136,10 @@ wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/0xProto.z
 unzip 0xProto.zip
 mv 0xProtoNerdFont* $HOME/.local/share/fonts
 rm 0xProto.zip
+wget "https://github.com/tywr/Nordwand-Mono/releases/download/1.3.1/NordwandMono-OTF.zip"
+unzip NordwandMono-OTF.zip
+mv NordwandMono* $HOME/.local/share/fonts
+rm NordwandMono-OTF.zip
 
 # set up distrobox
 doas apk add distrobox distrobox-doc
