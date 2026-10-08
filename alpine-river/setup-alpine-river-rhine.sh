@@ -71,8 +71,9 @@ rc-update -U add pipewire gui
 rc-update -U add wireplumber gui
 rc-update -U add pipewire-pulse gui
 
-echo 'export PATH=$HOME/.local/bin:\$PATH' >> $HOME/.profile
-source $HOME/.profile
+#echo 'export PATH=$HOME/.local/bin:\$PATH' >> $HOME/.profile
+#source $HOME/.profile
+ln -s $HOME/dotfiles/alpine-river/.profile $HOME/
 
 if user_confirm "Set up and compile River Window Manager"; then
 	doas setup-wayland-base
