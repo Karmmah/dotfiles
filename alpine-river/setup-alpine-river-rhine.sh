@@ -25,7 +25,6 @@ USER_NAME="$(id -un)"
 # install essential packages
 doas apk add \
 	tmux vim git htop \
-	river swaybg mako dbus dbus-openrc wl-clipboard xwayland \
 	greetd greetd-openrc greetd-tuigreet \
 	elogind elogind-openrc linux-pam util-linux-login polkit-elogind eudev eudev-openrc \
 	pipewire pipewire-openrc pipewire-pulse pipewire-pulse-openrc wireplumber wireplumber-openrc \
@@ -33,6 +32,7 @@ doas apk add \
 	tlp brightnessctl power-profiles-daemon \
 	networkmanager networkmanager-openrc networkmanager-bluetooth networkmanager-wifi \
 	build-base pkgconf zig river-dev \
+	river swaybg mako dbus dbus-openrc wl-clipboard xwayland \
 	wayland-dev wayland-protocols \
 	libxkbcommon-dev dbus-dev libinput \
 	wezterm-fonts \
@@ -52,6 +52,7 @@ mkdir -p \
 	$HOME/.config/waybar \
 	$HOME/.config/rc/runlevels/gui \
 	$HOME/.local/bin \
+	$HOME/.local/state \
 	$HOME/.local/share/fonts \
 	$HOME/.local/share/icons/ \
 	$HOME/Downloads \
@@ -83,7 +84,8 @@ rc-update -U add pipewire-pulse gui
 echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.profile
 
 if user_confirm "Set up and compile River Window Manager"; then
-	# set up window manager
+	doas setup-wayland-base
+	# rhine window manager for river
 	git clone https://codeberg.org/sivecano/rhine.git
 	cd rhine
 	zig build -Doptimize=ReleaseSafe &&
@@ -100,6 +102,14 @@ ln $HOME/dotfiles/alpine-river/start-wallpaper $HOME/.local/bin
 chmod +x $HOME/.local/bin/start-wallpaper
 ln $HOME/dotfiles/alpine-river/wallpaper-selector $HOME/.local/bin
 chmod +x $HOME/.local/bin/wallpaper-selector
+
+# switch shell
+doas apk add fish shadow &&
+echo "Available shells:"
+more /etc/shells
+doas chsh
+mkdir -p $HOME/.config/fish
+ln -s $HOME/dotfiles/fish/* $HOME/.config/fish
 
 # install optional software
 doas apk add \
@@ -121,13 +131,11 @@ ln -s $HOME/dotfiles/waybar/style.css $HOME/.config/waybar/style.css
 ln -s $HOME/dotfiles/fuzzel/fuzzel.ini $HOME/.config/fuzzel/fuzzel.ini 
 ln -s $HOME/dotfiles/foot/foot.ini $HOME/.config/foot/
 
-# switch shell
-doas apk add fish shadow &&
-echo "Available shells:"
-more /etc/shells
-doas chsh
-mkdir -p $HOME/.config/fish
-ln -s $HOME/dotfiles/fish/* $HOME/.config/fish
+# set up fonts
+wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/0xProto.zip"
+unzip 0xProto.zip
+mv 0xProtoNerdFont* $HOME/.local/share/fonts
+rm 0xProto.zip
 
 # set up distrobox
 doas apk add distrobox distrobox-doc
@@ -136,6 +144,7 @@ doas apk add distrobox distrobox-doc
 #doas echo "$(whoami):100000:65536" > /etc/subgid
 doas sh -c 'echo "$(whoami):100000:65536" >> /etc/subuid'
 doas sh -c 'echo "$(whoami):100000:65536" >> /etc/subgid'
+doas rc-service cgroups start
 
 if user_confirm "Set up Flatpak"; then
 	doas apk add flatpak
