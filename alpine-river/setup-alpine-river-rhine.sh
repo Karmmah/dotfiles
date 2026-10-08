@@ -23,7 +23,7 @@ doas apk add \
 	tmux git vim htop \
 	greetd greetd-openrc greetd-tuigreet \
 	elogind elogind-openrc linux-pam util-linux-login polkit-elogind eudev eudev-openrc \
-	pipewire pipewire-openrc pipewire-pulse pipewire-pulse-openrc wireplumber wireplumber-openrc \
+	pipewire pipewire-openrc pipewire-pulse pipewire-pulse-openrc wireplumber wireplumber-openrc pipewire-jack pipewire-alsa \
 	xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
 	tlp brightnessctl power-profiles-daemon \
 	networkmanager networkmanager-openrc networkmanager-bluetooth networkmanager-wifi \
@@ -66,17 +66,10 @@ doas rc-update add dbus default
 doas rc-update add elogind default
 doas rc-update add udev default
 doas rc-update add greetd default
-doas rc-service dbus start
-doas rc-service elogind start
-doas rc-service udev start
-doas rc-service greetd start
 
 rc-update -U add pipewire gui
 rc-update -U add wireplumber gui
 rc-update -U add pipewire-pulse gui
-rc-service -U pipewire start
-rc-service -U pipewire-pulse start
-rc-service -U wireplumber start
 
 echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.profile
 
@@ -143,14 +136,11 @@ doas apk add font-nerd-fonts-symbols
 # set up distrobox
 doas apk add distrobox distrobox-doc
 # from distrobox documentation
-#doas echo "$(whoami):100000:65536" > /etc/subuid
-#doas echo "$(whoami):100000:65536" > /etc/subgid
 doas sh -c 'echo "$(whoami):100000:65536" >> /etc/subuid'
 doas sh -c 'echo "$(whoami):100000:65536" >> /etc/subgid'
-#doas rc-service cgroups start
 
 if user_confirm "Set up Flatpak"; then
 	doas apk add flatpak
 	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-	flatpak install zen typesetter jdsp org.torproject.torbrowser-launcher vieb qview sioyek kwrite characters
+	flatpak install zen jdsp org.torproject.torbrowser-launcher vieb qview kwrite characters
 fi
