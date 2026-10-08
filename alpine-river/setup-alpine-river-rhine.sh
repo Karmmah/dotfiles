@@ -40,6 +40,23 @@ doas apk add \
 	man-pages man-db doas-doc \
 	&&
 
+# set up directories
+doas mkdir -p /etc/greetd
+mkdir -p \
+	$HOME/.config \
+	$HOME/.config/xdg-desktop-portal \
+	$HOME/.config/river \
+	$HOME/.config/river/scripts \
+	$HOME/.config/fuzzel \
+	$HOME/.config/foot \
+	$HOME/.config/waybar \
+	$HOME/.config/rc/runlevels/gui \
+	$HOME/.local/bin \
+	$HOME/.local/share/fonts \
+	$HOME/.local/share/icons/ \
+	$HOME/Downloads \
+	$HOME/Pictures
+
 # set up user groups
 doas addgroup "$USER_NAME" wheel
 doas addgroup "$USER_NAME" video
@@ -62,23 +79,6 @@ rc-update -U add pipewire-pulse gui
 #rc-service -U pipewire start
 #rc-service -U pipewire-pulse start
 #rc-service -U wireplumber start
-
-# set up directories
-doas mkdir -p /etc/greetd
-mkdir -p \
-	$HOME/.config \
-	$HOME/.config/xdg-desktop-portal \
-	$HOME/.config/river \
-	$HOME/.config/river/scripts \
-	$HOME/.config/fuzzel \
-	$HOME/.config/foot \
-	$HOME/.config/waybar \
-	$HOME/.config/rc/runlevels/gui \
-	$HOME/.local/bin \
-	$HOME/.local/share/fonts \
-	$HOME/.local/share/icons/ \
-	$HOME/Downloads \
-	$HOME/Pictures
 
 echo 'export PATH=$HOME/.local/bin:$PATH' >> $HOME/.profile
 
