@@ -14,3 +14,5 @@
 - make setup script executable "chmod +x ~/dotfiles/alpine-river/setup-alpine-river-rhine.sh"
 
 - run script (not as root)
+
+Info: probably have to run the script multiple times for everything to properly launch for some reason

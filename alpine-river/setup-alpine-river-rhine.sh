@@ -46,6 +46,7 @@ mkdir -p \
 	$HOME/.config/fuzzel \
 	$HOME/.config/foot \
 	$HOME/.config/waybar \
+	$HOME/.config/mako \
 	$HOME/.config/rc/runlevels/gui \
 	$HOME/.local/bin \
 	$HOME/.local/state \
@@ -111,8 +112,8 @@ doas apk add \
 	thunar thunar-doc gvfs
 
 # set up config files
-doas cp $HOME/dotfiles/alpine-river/greetd/config.toml /etc/greetd/config.toml &&
-doas cp $HOME/dotfiles/alpine-river/river-session /usr/local/bin/river-session &&
+doas ln $HOME/dotfiles/alpine-river/greetd/config.toml /etc/greetd/config.toml &&
+doas ln $HOME/dotfiles/alpine-river/river-session /usr/local/bin/river-session &&
 doas chmod +x /usr/local/bin/river-session
 ln -s $HOME/dotfiles/xdg-desktop-portal/portals.conf $HOME/.config/xdg-desktop-portal
 ln -s $HOME/dotfiles/river/init $HOME/.config/river/
@@ -123,13 +124,15 @@ ln -s $HOME/dotfiles/waybar/config.jsonc $HOME/.config/waybar/config.jsonc
 ln -s $HOME/dotfiles/waybar/style.css $HOME/.config/waybar/style.css
 ln -s $HOME/dotfiles/fuzzel/fuzzel.ini $HOME/.config/fuzzel/fuzzel.ini 
 ln -s $HOME/dotfiles/foot/foot.ini $HOME/.config/foot/
+ln -s $HOME/dotfiles/mako/config $HOME/.config/mako/
 
 # set up fonts
-#wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/0xProto.zip"
+#wget "https://github.com/0xType/0xProto/releases"
 #unzip 0xProto.zip
-#mv 0xProtoNerdFont* $HOME/.local/share/fonts
+#mv fonts/*.otf $HOME/.local/share/fonts
 #rm 0xProto.zip
-#wget "https://github.com/tywr/Nordwand-Mono/releases/download/1.3.1/NordwandMono-OTF.zip"
+#rm -r fonts
+#wget "https://github.com/tywr/Nordwand-Mono/releases"
 #unzip NordwandMono-OTF.zip
 #mv NordwandMono* $HOME/.local/share/fonts
 #rm NordwandMono-OTF.zip
