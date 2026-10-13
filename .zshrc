@@ -43,10 +43,12 @@ fi
 
 # --- Prompt ---
 setopt PROMPT_SUBST
-PROMPT='%(?..%F{9}fail:%? )${container_info}%F{5}%/
+#PROMPT='%(?..%F{9}code:%? )${container_info}%F{5}%/
+#%F{5}%#%f '
+PROMPT='%(?..%F{9}code:%? )${container_info}%F{5}%/
 %F{5}%#%f '
 # Explanation:
-#   First line: red fail if last command failed; current path in color
+#   First line: red exit code if last command failed; current path in color
 #   Second line: %# (shows % for normal user, # for root)
 
 # --- Git Info ---
